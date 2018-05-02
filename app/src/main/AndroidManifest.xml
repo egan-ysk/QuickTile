@@ -12,11 +12,11 @@
         tools:ignore="GoogleAppIndexingWarning">
 
         <!--<activity android:name=".MainActivity">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
+        <!--<intent-filter>-->
+        <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+        <!--<category android:name="android.intent.category.LAUNCHER" />-->
+        <!--</intent-filter>-->
         <!--</activity>-->
 
         <service
@@ -29,7 +29,22 @@
             <meta-data
                 android:name="android.service.quicksettings.ACTIVE_TILE"
                 android:value="true" />
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
 
+        </service>
+
+        <service
+            android:name="com.egan.quicktile.service.AliPayPayClock"
+            android:icon="@mipmap/ic_alipay_pay"
+            android:label="@string/string_alipay_pay_quickly_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+            android:process=":label">
+
+            <meta-data
+                android:name="android.service.quicksettings.ACTIVE_TILE"
+                android:value="true" />
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>

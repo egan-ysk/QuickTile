@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">QuickTile</string>
     <string name="string_ding_clock_quickly_label">钉钉打卡</string>
+    <string name="string_alipay_pay_quickly_label">支付宝付款</string>
 </resources>
