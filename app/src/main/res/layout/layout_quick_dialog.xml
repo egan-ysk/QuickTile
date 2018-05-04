@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.egan.quicktile.view.MaxHeightRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_content"
+    android:padding="10dp"
+    app:max_height="300dp"
+    tools:layout_height="1000dp">
+
+    <TextView
+        android:id="@+id/add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/bg_button_add"
+        android:gravity="start|center"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="增加"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/bg_button_delete"
+        android:gravity="end|center"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="删除"
+        tools:ignore="HardcodedText" />
+
+    <ListView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/delete"
+        android:layout_marginTop="10dp" />
+
+    <RelativeLayout
+        android:id="@+id/input_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/bg_input"
+        android:gravity="center"
+        android:padding="15dp"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <TextView
+            android:id="@+id/tip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="名称、scheme 数据中请不要使用'、'号" />
+
+        <EditText
+            android:id="@+id/editTextTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tip"
+            android:ems="10"
+            android:hint="请输入名称"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/editTextScheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editTextTitle"
+            android:layout_marginBottom="10dp"
+            android:ems="10"
+            android:hint="请输入 scheme"
+            android:inputType="text|textUri|textPersonName"
+            android:lines="1" />
+
+        <Button
+            android:id="@+id/buttonCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/editTextScheme"
+            android:layout_marginLeft="10dp"
+            android:text="取消" />
+
+        <Button
+            android:id="@+id/buttonSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/editTextScheme"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@+id/buttonCancel"
+            android:text="保存" />
+
+    </RelativeLayout>
+
+</com.egan.quicktile.view.MaxHeightRelativeLayout>
