@@ -3,6 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.egan.quicktile">
 
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 网络权限 -->
+    <uses-permission android:name="android.permission.VIBRATE" /> <!-- 震动权限 -->
+    <uses-permission android:name="android.permission.CAMERA" /> <!-- 摄像头权限 -->
+    <uses-feature android:name="android.hardware.camera.autofocus" /> <!-- 自动聚焦权限 -->
+
     <application
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
@@ -18,6 +23,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+
+        <activity android:name="com.google.zxing.activity.CaptureActivity" />
 
         <service
             android:name="com.egan.quicktile.service.DingDingClock"
@@ -55,6 +64,21 @@
             android:name="com.egan.quicktile.service.CustomService"
             android:icon="@mipmap/ic_alipay_pay"
             android:label="@string/string_custom_quickly_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+
+            <meta-data
+                android:name="android.service.quicksettings.ACTIVE_TILE"
+                android:value="true" />
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+
+        </service>
+
+        <service
+            android:name="com.egan.quicktile.service.ScanService"
+            android:icon="@mipmap/ic_alipay_pay"
+            android:label="@string/string_scan_quickly_label"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
 
             <meta-data
