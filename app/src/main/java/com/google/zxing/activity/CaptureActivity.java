@@ -3,7 +3,6 @@ package com.google.zxing.activity;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -13,11 +12,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
 import android.widget.Toast;
 
+import com.egan.quicktile.MainActivity;
 import com.egan.quicktile.R;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
@@ -27,6 +28,8 @@ import com.google.zxing.decoding.InactivityTimer;
 import com.google.zxing.view.ViewfinderView;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Vector;
 
 
@@ -278,22 +281,22 @@ public class CaptureActivity extends Activity implements Callback {
             // The volume on STREAM_SYSTEM is not adjustable, and users found it
             // too loud,
             // so we now play on the music stream.
-            setVolumeControlStream(AudioManager.STREAM_MUSIC);
-            mediaPlayer = new MediaPlayer();
-            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-            mediaPlayer.setOnCompletionListener(beepListener);
-
-            AssetFileDescriptor file = getResources().openRawResourceFd(
-                    R.raw.beep);
-            try {
-                mediaPlayer.setDataSource(file.getFileDescriptor(),
-                        file.getStartOffset(), file.getLength());
-                file.close();
-                mediaPlayer.setVolume(BEEP_VOLUME, BEEP_VOLUME);
-                mediaPlayer.prepare();
-            } catch (IOException e) {
-                mediaPlayer = null;
-            }
+//            setVolumeControlStream(AudioManager.STREAM_MUSIC);
+//            mediaPlayer = new MediaPlayer();
+//            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+//            mediaPlayer.setOnCompletionListener(beepListener);
+//
+//            AssetFileDescriptor file = getResources().openRawResourceFd(
+//                    R.raw.beep);
+//            try {
+//                mediaPlayer.setDataSource(file.getFileDescriptor(),
+//                        file.getStartOffset(), file.getLength());
+//                file.close();
+//                mediaPlayer.setVolume(BEEP_VOLUME, BEEP_VOLUME);
+//                mediaPlayer.prepare();
+//            } catch (IOException e) {
+//                mediaPlayer = null;
+//            }
         }
     }
 
@@ -347,16 +350,25 @@ public class CaptureActivity extends Activity implements Callback {
     }
 
     private void startIntent(String result) {
+        Log.d("YSK", result);
         Intent intent = null;
-        if (result.toLowerCase().contains("wxp://")) {
+        if (result.toLowerCase().startsWith("wxp://")) {
             intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse("weixin://"));
         } else if (result.toLowerCase().contains("qr.alipay.com")) {
-            intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse("alipays://"));
-        } else if (result.toLowerCase().startsWith("http://") || result.toLowerCase().startsWith("https://")) {
-            // TODO: by maka 2018/5/9 上午10:37 浏览器...
+            // alipays://platformapi/startapp?saId=10000007&qrcode=https%3A%2F%2Fqr.alipay.com%2Ffkx02932cpcptcqdglyuc6%3Ft%3D1525831417182
+            try {
+                String encode = URLEncoder.encode(result.toLowerCase(), "utf-8");
+                String scheme = "alipays://platformapi/startapp?saId=10000007&qrcode=" + encode;
+                intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse(scheme));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        } else {
+            intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse(result.toLowerCase()));
         }
         if (intent != null) {
-            startActivity(intent);
+            startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            startActivity(new Intent(this, MainActivity.class).putExtra("url", result.toLowerCase()));
         }
     }
 }
