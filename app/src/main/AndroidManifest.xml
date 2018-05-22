@@ -78,6 +78,21 @@
         </service>
 
         <service
+            android:name="com.egan.quicktile.service.WechatScanService"
+            android:icon="@mipmap/ic_wechat_scan"
+            android:label="@string/string_wechat_scan_quickly_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+
+            <meta-data
+                android:name="android.service.quicksettings.ACTIVE_TILE"
+                android:value="true" />
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+
+        </service>
+
+        <service
             android:name="com.egan.quicktile.service.CustomService"
             android:icon="@mipmap/ic_alipay_pay"
             android:label="@string/string_custom_quickly_label"

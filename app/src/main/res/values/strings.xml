@@ -5,4 +5,5 @@
     <string name="string_alipay_scan_quickly_label">支付扫一扫</string>
     <string name="string_custom_quickly_label">快捷集合</string>
     <string name="string_scan_quickly_label">扫一扫</string>
+    <string name="string_wechat_scan_quickly_label">微信扫一扫</string>
 </resources>
