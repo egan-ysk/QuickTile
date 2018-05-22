@@ -17,20 +17,20 @@ class MainActivity : Activity() {
 
 //        text_view.setOnClickListener { startActivity(Intent(this, CaptureActivity::class.java)) }
 
-        if (intent != null) {
-            val url = intent.getStringExtra("url")
-            webView.settings.javaScriptEnabled = true
-            webView.settings.domStorageEnabled = true
-            webView.webViewClient = object : WebViewClient() {
-                override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
-                    Log.d("YSK", "加载的 URl >>> " + view?.url)
-                    return super.shouldOverrideUrlLoading(view, request)
-                }
-            }
-
-            if (url != null && url.isNotEmpty()) {
-                webView.loadUrl(url)
-            }
-        }
+//        if (intent != null) {
+//            val url = intent.getStringExtra("url")
+//            webView.settings.javaScriptEnabled = true
+//            webView.settings.domStorageEnabled = true
+//            webView.webViewClient = object : WebViewClient() {
+//                override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
+//                    Log.d("YSK", "加载的 URl >>> " + view?.url)
+//                    return super.shouldOverrideUrlLoading(view, request)
+//                }
+//            }
+//
+//            if (url != null && url.isNotEmpty()) {
+//                webView.loadUrl(url)
+//            }
+//        }
     }
 }

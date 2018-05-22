@@ -61,6 +61,21 @@
             </intent-filter>
 
         </service>
+        <service
+            android:name="com.egan.quicktile.service.AliPayScanService"
+            android:icon="@mipmap/ic_alipay_scan"
+            android:label="@string/string_alipay_scan_quickly_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+            android:process=":label">
+
+            <meta-data
+                android:name="android.service.quicksettings.ACTIVE_TILE"
+                android:value="true" />
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+
+        </service>
 
         <service
             android:name="com.egan.quicktile.service.CustomService"

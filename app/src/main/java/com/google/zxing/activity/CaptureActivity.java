@@ -18,7 +18,6 @@ import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
 import android.widget.Toast;
 
-import com.egan.quicktile.MainActivity;
 import com.egan.quicktile.R;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
@@ -353,7 +352,8 @@ public class CaptureActivity extends Activity implements Callback {
         Log.d("YSK", result);
         Intent intent = null;
         if (result.toLowerCase().startsWith("wxp://")) {
-            intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse("weixin://"));
+//            intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse("weixin://wap/pay"));
+            intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse("weixin://scanqrcode"));
         } else if (result.toLowerCase().contains("qr.alipay.com")) {
             // alipays://platformapi/startapp?saId=10000007&qrcode=https%3A%2F%2Fqr.alipay.com%2Ffkx02932cpcptcqdglyuc6%3Ft%3D1525831417182
             try {
@@ -367,8 +367,8 @@ public class CaptureActivity extends Activity implements Callback {
             intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse(result.toLowerCase()));
         }
         if (intent != null) {
-            startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-            startActivity(new Intent(this, MainActivity.class).putExtra("url", result.toLowerCase()));
+             startActivity(intent);
+//            startActivity(new Intent(this, MainActivity.class).putExtra("url", result.toLowerCase()));
         }
     }
 }

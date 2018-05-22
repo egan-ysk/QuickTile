@@ -15,4 +15,7 @@ object AppConstant {
     // 支付宝付款码的 scheme
     public final val SCHEME_ALIPAY_PAY = "alipays://platformapi/startapp?appId=20000056"
 
+    // 支付宝扫一扫 scheme
+    public final val SCHEME_ALIPAY_SCAN = "alipays://platformapi/startapp?saId=10000007"
+
 }
