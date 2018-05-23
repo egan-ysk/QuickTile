@@ -81,7 +81,8 @@
             android:name="com.egan.quicktile.service.WechatScanService"
             android:icon="@mipmap/ic_wechat_scan"
             android:label="@string/string_wechat_scan_quickly_label"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+            android:process=":label">
 
             <meta-data
                 android:name="android.service.quicksettings.ACTIVE_TILE"
@@ -96,7 +97,8 @@
             android:name="com.egan.quicktile.service.CustomService"
             android:icon="@mipmap/ic_alipay_pay"
             android:label="@string/string_custom_quickly_label"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+            android:process=":label">
 
             <meta-data
                 android:name="android.service.quicksettings.ACTIVE_TILE"
@@ -111,7 +113,8 @@
             android:name="com.egan.quicktile.service.ScanService"
             android:icon="@mipmap/ic_alipay_pay"
             android:label="@string/string_scan_quickly_label"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+            android:process=":label">
 
             <meta-data
                 android:name="android.service.quicksettings.ACTIVE_TILE"
@@ -119,6 +122,21 @@
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
+
+        </service>
+
+        <service
+            android:name=".service.AutoInstallAccessibilityService"
+            android:label="自动安装"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
+            android:process=":label">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/xml_accessibility_config" />
 
         </service>
 

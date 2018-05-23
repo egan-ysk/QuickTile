@@ -6,4 +6,7 @@
     <string name="string_custom_quickly_label">快捷集合</string>
     <string name="string_scan_quickly_label">扫一扫</string>
     <string name="string_wechat_scan_quickly_label">微信扫一扫</string>
+
+
+    <string name="string_accessibility">其用于在安装软件时的自动下一步操作！！！！</string>
 </resources>
