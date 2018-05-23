@@ -4,5 +4,5 @@
     android:accessibilityFeedbackType="feedbackGeneric"
     android:accessibilityFlags="flagDefault"
     android:canRetrieveWindowContent="true"
-    android:description="@string/string_accessibility"
+    android:description="@string/string_accessibility_tip"
     android:packageNames="com.android.packageinstaller" />

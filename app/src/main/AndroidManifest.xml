@@ -111,7 +111,7 @@
 
         <service
             android:name="com.egan.quicktile.service.ScanService"
-            android:icon="@mipmap/ic_alipay_pay"
+            android:icon="@mipmap/ic_scan"
             android:label="@string/string_scan_quickly_label"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
             android:process=":label">
@@ -127,7 +127,7 @@
 
         <service
             android:name=".service.AutoInstallAccessibilityService"
-            android:label="自动安装"
+            android:label="@string/string_accessibility_label"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
             android:process=":label">
             <intent-filter>
