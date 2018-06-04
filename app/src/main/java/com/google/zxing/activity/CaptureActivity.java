@@ -1,7 +1,11 @@
 package com.google.zxing.activity;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.AudioManager;
@@ -13,9 +17,12 @@ import android.os.Handler;
 import android.os.Vibrator;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.egan.quicktile.R;
@@ -29,7 +36,9 @@ import com.google.zxing.view.ViewfinderView;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Vector;
+import java.util.stream.Collectors;
 
 
 /**
@@ -57,6 +66,9 @@ public class CaptureActivity extends Activity implements Callback {
     //	private Button cancelScanButton;
 //    public static final int RESULT_CODE_QR_SCAN = 0xA1;
 //    public static final String INTENT_EXTRA_KEY_QR_SCAN = "qr_scan_result";
+
+    private Dialog dialog = null;
+    private TextView textView = null;
 
     /**
      * Called when the activity is first created.
@@ -343,9 +355,51 @@ public class CaptureActivity extends Activity implements Callback {
 //            resultIntent.putExtras(bundle);
 //            this.setResult(RESULT_CODE_QR_SCAN, resultIntent);
             // TODO: by maka 2018/5/9 上午10:07 获得数据
-            startIntent(resultString);
+            showResult(resultString);
+//            startIntent(resultString);
         }
-        CaptureActivity.this.finish();
+//        CaptureActivity.this.finish();
+    }
+
+    private void showResult(final String resultString) {
+        Log.d("egan", "CaptureActivity : showResult >>> " + String.valueOf("扫描结果" + resultString));
+        if (null == dialog || null == textView) {
+            dialog = new Dialog(this);
+            dialog.setTitle("扫描结果");
+            View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.layout_dialog_scan_result, null);
+            textView = view.findViewById(R.id.textViewResult);
+            view.findViewById(R.id.buttonCancel).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+            view.findViewById(R.id.buttonBrowser).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(resultString));
+                    startActivity(intent);
+                    CaptureActivity.this.finish();
+                }
+            });
+            view.findViewById(R.id.buttonClipboard).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // 得到剪贴板管理器
+                    ClipboardManager cmb = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                    if (null != cmb){
+                        cmb.setPrimaryClip(ClipData.newPlainText("扫描结果", resultString));
+                        CaptureActivity.this.finish();
+                    }else {
+                        Toast.makeText(CaptureActivity.this, "复制失败", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+            dialog.setContentView(view);
+        }
+        textView.setText(resultString);
+        dialog.show();
     }
 
     private void startIntent(String result) {
@@ -355,7 +409,8 @@ public class CaptureActivity extends Activity implements Callback {
 //            intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse("weixin://wap/pay"));
             intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse("weixin://scanqrcode"));
         } else if (result.toLowerCase().contains("qr.alipay.com")) {
-            // alipays://platformapi/startapp?saId=10000007&qrcode=https%3A%2F%2Fqr.alipay.com%2Ffkx02932cpcptcqdglyuc6%3Ft%3D1525831417182
+            // alipays://platformapi/startapp?saId=10000007&qrcode=https%3A%2F%2Fqr.alipay
+            // .com%2Ffkx02932cpcptcqdglyuc6%3Ft%3D1525831417182
             try {
                 String encode = URLEncoder.encode(result.toLowerCase(), "utf-8");
                 String scheme = "alipays://platformapi/startapp?saId=10000007&qrcode=" + encode;
@@ -367,7 +422,7 @@ public class CaptureActivity extends Activity implements Callback {
             intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse(result.toLowerCase()));
         }
         if (intent != null) {
-             startActivity(intent);
+            startActivity(intent);
 //            startActivity(new Intent(this, MainActivity.class).putExtra("url", result.toLowerCase()));
         }
     }

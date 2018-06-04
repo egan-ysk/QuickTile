@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textViewResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start|center"
+        android:lineSpacingMultiplier="1.2"
+        android:padding="10dp"
+        android:text="TextView"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        tools:ignore="HardcodedText" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewResult"
+        android:layout_marginTop="20dp">
+
+        <Button
+            android:id="@+id/buttonCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="取消"
+            android:textSize="12sp"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/buttonBrowser"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:textSize="12sp"
+            android:text="浏览器打开"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/buttonClipboard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="13dp"
+            android:layout_weight="3"
+            android:textSize="12sp"
+            android:text="复制到剪切板"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
+</RelativeLayout>
