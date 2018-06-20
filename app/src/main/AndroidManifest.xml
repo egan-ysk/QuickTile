@@ -126,6 +126,22 @@
         </service>
 
         <service
+            android:name="com.egan.quicktile.service.DevelopSettingService"
+            android:icon="@mipmap/ic_develop_setting"
+            android:label="@string/string_develop_settings_quickly_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+            android:process=":label">
+
+            <meta-data
+                android:name="android.service.quicksettings.ACTIVE_TILE"
+                android:value="true" />
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+
+        </service>
+
+        <service
             android:name=".service.AutoInstallAccessibilityService"
             android:label="@string/string_accessibility_label"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
