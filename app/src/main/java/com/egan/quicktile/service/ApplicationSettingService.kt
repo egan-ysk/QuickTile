@@ -4,7 +4,7 @@ import android.content.ComponentName
 import android.content.Intent
 import android.service.quicksettings.TileService
 
-class DevelopSettingService : TileService() {
+class ApplicationSettingService : TileService() {
     override fun onClick() {
         super.onClick()
         Intent().apply {
