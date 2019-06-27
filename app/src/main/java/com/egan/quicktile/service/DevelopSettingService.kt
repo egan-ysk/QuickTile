@@ -8,8 +8,7 @@ class DevelopSettingService : TileService() {
     override fun onClick() {
         super.onClick()
         Intent().apply {
-            action = Intent.ACTION_VIEW
-            component = ComponentName("com.android.settings", "com.android.settings.DevelopmentSettings")
+            component = ComponentName("com.android.settings", "com.android.settings.Settings.DevelopmentActivity")
             startActivityAndCollapse(this)
         }
     }
