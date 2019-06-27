@@ -70,6 +70,11 @@ public class CaptureActivity extends Activity implements Callback {
     private Dialog dialog = null;
     private TextView textView = null;
 
+
+
+
+
+
     /**
      * Called when the activity is first created.
      */
